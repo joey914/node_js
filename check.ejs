@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+  <legend>확인한다 정보 (오직 나으서버)</legend>
+  <div class="table-responsive">
+  <table class="table table-hover" id="table">
+    <tr>
+      <th>이름</th>
+      <th>카카오톡 ID</th>
+      <th>이메일</th>
+      <th>전화번호</th>
+      <th>배틀태그</th>
+    </tr>
+</table>
+</div>
+    <script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+    <script>
+    $(document).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: "http://joey914.iptime.org:3000/userdataa",
+            success: function(data)     {
+          var testjson = eval(data);
+            for(var i=0;i < testjson.length;i++)
+            {
+              document.getElementById("table").innerHTML += "<tr><td>"+testjson[i].name+"</td><td>"+testjson[i].kakaotalk+"</td><td>"+testjson[i].email+"</td><td>"+testjson[i].Phonenum+"</td><td>"+testjson[i].battletag+"</td></tr>"
+            }
+        },
+            error: function(xhr, status, error)     {
+            alert("서버에 문제가 있습니다. 관리자에게 문의하세요");
+        }
+    });
+});
+    </script>
+</body>
+
+</html>
